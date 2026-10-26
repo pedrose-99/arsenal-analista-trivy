@@ -1,0 +1,32 @@
+name: trivy
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # reescaneo semanal: salen CVE nuevos aunque el código no cambie
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Escaneo fs (dependencias + secretos + IaC)
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scanners: vuln,secret,misconfig
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          format: sarif
+          output: trivy.sarif
+          exit-code: "0"        # informar sin romper; pasar a "1" para hacer de quality gate
+
+      - name: Subir resultados a la pestaña Security
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy.sarif

@@ -1,0 +1,4 @@
+# Ejemplo educativo: se ignora por ID de CVE (afecta a TODAS las instancias del paquete).
+# En un caso real, documenta siempre el motivo y una fecha de revisión.
+# Ver .trivyignore.yaml para la versión con caducidad y paths.
+CVE-2015-9235

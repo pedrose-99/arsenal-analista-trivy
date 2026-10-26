@@ -1,0 +1,7 @@
+# Formato YAML: permite acotar por paths, justificar y poner caducidad.
+vulnerabilities:
+  - id: CVE-2015-9235
+    paths:
+      - "juice-shop/node_modules/jsonwebtoken/package.json"
+    statement: "Aplicación de entrenamiento vulnerable a propósito; no se despliega."
+    expired_at: 2026-12-31

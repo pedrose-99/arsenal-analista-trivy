@@ -1,0 +1,11 @@
+# Fichero de configuración: trivy --config examples/trivy.yaml image <imagen>
+severity:
+  - HIGH
+  - CRITICAL
+scan:
+  scanners:
+    - vuln
+    - secret
+vulnerability:
+  ignore-unfixed: true
+format: table
